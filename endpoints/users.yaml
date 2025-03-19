@@ -1,0 +1,30 @@
+path: "/users"
+method: "GET"
+scenarios:
+  - scenario_name: "Admin Users"
+    rules_data:
+      - target: "params"
+        prop: "admin"
+        op: "EQUALS"
+        value: "true"
+    response:
+      status: 200
+      data:
+        msg: "List of admin users"
+        users:
+          - id: 1
+            name: "Admin Alice"
+          - id: 2
+            name: "Admin Bob"
+
+  - scenario_name: "Non-Admin"
+    rules_data: []
+    response:
+      status: 200
+      data:
+        msg: "List of normal users"
+        users:
+          - id: 101
+            name: "Regular Charlie"
+          - id: 102
+            name: "Regular Diana"

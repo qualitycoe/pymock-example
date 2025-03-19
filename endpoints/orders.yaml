@@ -1,0 +1,35 @@
+path: "/orders"
+method: "POST"
+scenarios:
+  - scenario_name: "Valid Order JSON Schema"
+    rules_data:
+      - target: "body"
+        prop: ""
+        op: "VALID_JSON_SCHEMA"
+        value:
+          type: object
+          required: ["order_id", "items"]
+          properties:
+            order_id:
+              type: string
+              pattern: "^ORD-[0-9]+$"
+            items:
+              type: array
+  - scenario_name: "Check for Specific Item ID"
+    rules_data:
+      - target: "body"
+        prop: "$.items[*].id"   # JSONPath example
+        op: "ARRAY_INCLUDES"
+        value: 999
+    response:
+      status: 200
+      template: "order_confirmation.html"
+      data:
+        message: "Order with special item included!"
+  
+  - scenario_name: "Any Order"
+    rules_data: []
+    response:
+      status: 200
+      data:
+        message: "Order received, but no special items found."
