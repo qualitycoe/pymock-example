@@ -37,11 +37,11 @@ clean:
 
 ## ------- DOCKER TASKS ------- ##
 
-docker-build:
+dcb:
 	@echo ">>> Building Docker image: $(IMAGE_NAME)"
 	docker build -t $(IMAGE_NAME) .
 
-docker-run: docker-build
+dcr: dcb
 	@echo ">>> Running Docker container on port $(PORT)"
 	docker run --rm -d \
 		--name $(CONTAINER_NAME) \
@@ -52,15 +52,15 @@ docker-run: docker-build
 		-e PYMOCK__LOG_FILE=/logs/pymock.log \
 		$(IMAGE_NAME)
 
-docker-stop:
+dcs:
 	@echo ">>> Stopping Docker container: $(CONTAINER_NAME)"
 	-docker stop $(CONTAINER_NAME)
 
-docker-logs:
+dcl:
 	@echo ">>> Tail logs for Docker container: $(CONTAINER_NAME)"
 	docker logs -f $(CONTAINER_NAME)
 
-docker-clean: docker-stop
+dcc: dcs
 	@echo ">>> Removing Docker container and image"
 	-docker rm $(CONTAINER_NAME) || true
 	-docker rmi $(IMAGE_NAME) || true
