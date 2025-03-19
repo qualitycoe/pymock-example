@@ -15,10 +15,27 @@ scenarios:
               pattern: "^ORD-[0-9]+$"
             items:
               type: array
-  - scenario_name: "Check for Specific Item ID"
+    response:
+      status: 200
+      data:
+        message: "Valid schema (no special items check performed)."
+
+  - scenario_name: "Valid + Special Item"
     rules:
       - target: "body"
-        prop: "$.items[*].id"   # JSONPath example
+        prop: ""            # Checking entire body
+        op: "VALID_JSON_SCHEMA"
+        value:
+          type: object
+          required: ["order_id", "items"]
+          properties:
+            order_id:
+              type: string
+              pattern: "^ORD-[0-9]+$"
+            items:
+              type: array
+      - target: "body"
+        prop: "$.items[*].id"
         op: "ARRAY_INCLUDES"
         value: 999
     response:
@@ -26,7 +43,7 @@ scenarios:
       template: "order_confirmation.html"
       data:
         message: "Order with special item included!"
-  
+
   - scenario_name: "Any Order"
     rules: []
     response:
