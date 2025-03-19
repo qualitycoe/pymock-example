@@ -2,7 +2,7 @@ path: "/users"
 method: "GET"
 scenarios:
   - scenario_name: "Admin Users"
-    rules_data:
+    rules:
       - target: "params"
         prop: "admin"
         op: "EQUALS"
@@ -18,7 +18,7 @@ scenarios:
             name: "Admin Bob"
 
   - scenario_name: "Non-Admin"
-    rules_data: []
+    rules: []
     response:
       status: 200
       data:

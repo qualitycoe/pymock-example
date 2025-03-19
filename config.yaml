@@ -1,3 +1,9 @@
+debug: true
+
+logging:
+  level: "INFO"         # Default log level: INFO, DEBUG, WARNING, etc.
+  file: "/logs/pymock.log"
+
 server:
   host: "0.0.0.0"
   port: 8085

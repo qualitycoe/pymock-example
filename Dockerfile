@@ -12,8 +12,11 @@ COPY main.py main.py
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Make sure /logs directory exists
+RUN mkdir /logs
+
 # Expose port
-EXPOSE 5000
+EXPOSE 8085
 
 # Run the mock server on container start
 CMD ["python", "main.py"]

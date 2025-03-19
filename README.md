@@ -182,7 +182,7 @@ path: "/users"
 method: "GET"
 scenarios:
   - scenario_name: "Admin Users"
-    rules_data:
+    rules:
       - target: "params"        # or "query_params" if you customized RuleEngineX
         prop: "admin"
         op: "EQUALS"
@@ -198,7 +198,7 @@ scenarios:
             name: "Admin Bob"
 
   - scenario_name: "Non-Admin"
-    rules_data: []
+    rules: []
     response:
       status: 200
       data:
@@ -222,7 +222,7 @@ path: "/orders"
 method: "POST"
 scenarios:
   - scenario_name: "Special Item Order"
-    rules_data:
+    rules:
       - target: "body"
         prop: "$.items[*].id"
         op: "ARRAY_INCLUDES"
@@ -234,7 +234,7 @@ scenarios:
         message: "Order with special item included!"
 
   - scenario_name: "Generic Order"
-    rules_data: []
+    rules: []
     response:
       status: 200
       data:
