@@ -1,0 +1,22 @@
+path: "/hello"
+method: "GET"
+scenarios:
+  - scenario_name: "Template Greeting"
+    rules:
+      - target: "params"
+        prop: "use_template"
+        op: "EQUALS"
+        value: "true"
+    response:
+      status: 200
+      template: "greeting.html"
+      data:
+        info: "If use_template is true, we see a full HTML page."
+
+  - scenario_name: "JSON Greeting"
+    rules: []
+    response:
+      status: 200
+      data:
+        message: "Hello! (JSON response; pass ?use_template=true to see HTML)"
+

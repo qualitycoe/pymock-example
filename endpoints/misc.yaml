@@ -1,0 +1,42 @@
+path: "/misc"
+method: "GET"
+scenarios:
+  - scenario_name: "Null Check"
+    rules:
+      - target: "params"
+        prop: "debug"
+        op: "NULL"
+        value: null
+    response:
+      status: 200
+      data:
+        msg: "Param 'debug' was null/absent. Null check passed."
+
+  - scenario_name: "Empty Array Check"
+    rules:
+      - target: "body"
+        prop: "items"
+        op: "EMPTY_ARRAY"
+        value: null
+    response:
+      status: 200
+      data:
+        msg: "items array is empty!"
+
+  - scenario_name: "Header Regex"
+    rules:
+      - target: "headers"
+        prop: "X-Custom-Token"
+        op: "REGEX_CASE_INSENSITIVE"
+        value: "^token-[a-z0-9]+$"
+    response:
+      status: 200
+      data:
+        msg: "X-Custom-Token matched the pattern!"
+
+  - scenario_name: "Fallback"
+    rules: []
+    response:
+      status: 200
+      data:
+        msg: "No scenario matched in /misc."
